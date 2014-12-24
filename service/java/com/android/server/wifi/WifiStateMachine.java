@@ -5670,6 +5670,7 @@ public class WifiStateMachine extends StateMachine implements WifiNative.WifiPno
                     if (message.arg1 == 1) {
                         mSuspendWakeLock.release();
                         setSuspendOptimizations(SUSPEND_DUE_TO_SCREEN, true);
+                        mWifiNative.setPowerSave(true);
                     } else {
                         setSuspendOptimizations(SUSPEND_DUE_TO_SCREEN, false);
                     }
@@ -6461,6 +6462,7 @@ public class WifiStateMachine extends StateMachine implements WifiNative.WifiPno
                     if (message.arg1 == 1) {
                         setSuspendOptimizationsNative(SUSPEND_DUE_TO_SCREEN, true);
                         mSuspendWakeLock.release();
+                        mWifiNative.setPowerSave(true);
                     } else {
                         setSuspendOptimizationsNative(SUSPEND_DUE_TO_SCREEN, false);
                     }

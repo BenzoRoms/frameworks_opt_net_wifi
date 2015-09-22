@@ -1462,7 +1462,14 @@ public class WifiAutoJoinController {
         }
 
         // Find the currently connected network: ask the supplicant directly
-        int supplicantNetId = getNetID(mWifiNative.status(true));
+        String val = mWifiNative.status(true);
+
+        if (val == null) {
+            if (DBG)  logDbg("Cannot get WiFi supplicant status");
+            return false;
+        }
+
+        int supplicantNetId = getNetID(val);
 
         if (DBG) {
             String conf = "";

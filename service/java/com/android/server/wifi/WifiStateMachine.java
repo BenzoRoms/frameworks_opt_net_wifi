@@ -2583,9 +2583,7 @@ public class WifiStateMachine extends StateMachine implements WifiNative.WifiPno
     public void updateBatteryWorkSource(WorkSource newSource) {
         synchronized (mRunningWifiUids) {
             try {
-                if (newSource != null) {
-                    mRunningWifiUids.set(newSource);
-                }
+                mRunningWifiUids.set(newSource);
                 if (mIsRunning) {
                     if (mReportedRunning) {
                         // If the work source has changed since last time, need

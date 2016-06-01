@@ -307,6 +307,21 @@ class SupplicantStateTracker extends StateMachine {
          public void enter() {
              if (DBG) Log.d(TAG, getName() + "\n");
          }
+
+        @Override
+        public boolean processMessage(Message message) {
+            if (DBG) Log.d(TAG, getName() + message.toString() + "\n");
+            switch (message.what) {
+                case WifiStateMachine.CMD_RESET_SUPPLICANT_STATE:
+                    sendSupplicantStateChangedBroadcast(SupplicantState.DISCONNECTED, false);
+                    transitionTo(mUninitializedState);
+                    break;
+                default:
+                    return NOT_HANDLED;
+            }
+            return HANDLED;
+        }
+
     }
 
     class HandshakeState extends State {
